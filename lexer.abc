@@ -1,0 +1,92 @@
+@ <stdio.hdr>
+@ "lexer.hdr"
+
+global token: Token = {BAD_TOKEN,{0,0}};
+
+global ch: int;
+global currentPos: Pos = {1, 0};
+
+global updateVal: bool;
+global lengthVal: size_t;
+
+fn nextCh()
+{
+    if (updateVal) {
+        assert(lengthVal < sizeof(token.val) / sizeof(token.val[0]));
+        token.val[lengthVal++] = ch;
+        token.val[lengthVal] = 0;
+    }
+    ch = getchar();
+    if (ch == '\n') {
+        ++currentPos.row;
+        currentPos.col = 0;
+    } else {
+        ++currentPos.col;
+    }
+}
+
+fn isDigit(ch: int): bool
+{
+    return ch >= '0' && ch <= '9';
+}
+
+fn isLetter(ch: int): bool
+{
+    return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z';
+}
+
+fn getToken(): Token
+{
+    updateVal = false;
+    while (ch == 0 || ch == ' ' || ch == '\t' || ch == '\n') {
+        nextCh();
+    }
+    updateVal = true;
+    lengthVal = 0;
+    token.pos = currentPos;
+    if (isDigit(ch)) {
+        while (isDigit(ch)) {
+            nextCh();
+        }
+        token.kind = DECIMAL_LITERAL;
+    } else if (isLetter(ch)) {
+        while (isLetter(ch)) {
+            nextCh();
+        }
+        token.kind = IDENTIFIER;
+    } else if (ch == '+') {
+        nextCh();
+        token.kind = PLUS;
+    } else if (ch == '*') {
+        nextCh();
+        token.kind = ASTERISK;
+    } else if (ch == ')') {
+        nextCh();
+        token.kind = RPAREN;
+    } else if (ch == '(') {
+        nextCh();
+        token.kind = LPAREN;
+    } else if (ch == EOF) {
+        token.kind = EOI;
+    } else {
+        nextCh();
+        token.kind = BAD_TOKEN;
+    }
+    return token;
+}
+
+
+fn tokenKindStr(token: TokenKind): -> char
+{
+    switch (token) {
+        case BAD_TOKEN:         return "BAD_TOKEN";
+        case EOI:               return "EOI";
+        case DECIMAL_LITERAL:   return "DECIMAL_LITERAL";
+        case IDENTIFIER:        return "IDENTIFIER";
+        case PLUS:              return "PLUS";
+	case LPAREN:		return "LPAREN";
+	case RPAREN:		return "RPAREN";
+        case ASTERISK:          return "ASTERISK";
+        default:                return "??";
+    }
+}
