@@ -1,0 +1,4 @@
+HALT halt
+LOAD load
+ADD add
+MUL mul

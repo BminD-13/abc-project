@@ -1,0 +1,5 @@
+fn getReg(): int
+{
+    static reg: int;
+}
+

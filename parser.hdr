@@ -1,0 +1,9 @@
+@ <stdio.hdr>
+
+fn parseSum(): int;
+
+fn parseFactor(): int;
+
+fn parseProd(): int;
+
+
