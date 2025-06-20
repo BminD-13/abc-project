@@ -1,9 +1,7 @@
-@ <stdio.hdr>
+extern fn parseSum(): int;
 
-fn parseSum(): int;
+extern fn parseFactor(): int;
 
-fn parseFactor(): int;
-
-fn parseProd(): int;
+extern fn parseProd(): int;
 
 

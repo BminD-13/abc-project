@@ -1,6 +1,7 @@
 @ <stdio.hdr>
 
 @ "parser.hdr"
+@ "lexer.hdr"
 @ "gen.hdr"
 
 fn parseFactor(): int

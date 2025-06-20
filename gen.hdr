@@ -1,5 +1,2 @@
-fn getReg(): int
-{
-    static reg: int;
-}
+extern fn getReg(): int;
 
