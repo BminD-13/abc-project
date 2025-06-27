@@ -1,7 +1,6 @@
-extern fn parseSum(): int;
+@ "expr.hdr"
 
-extern fn parseFactor(): int;
-
-extern fn parseProd(): int;
-
+extern fn parseExpr(): -> Expr;
+extern fn parseFactor(): -> Expr;
+extern fn parseTerm(): -> Expr;
 

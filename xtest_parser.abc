@@ -2,13 +2,14 @@
 
 @ "parser.hdr"
 @ "lexer.hdr"
+@ "gen.hdr"
 
 fn main()
 {
     getToken();
-    local reg: int = parseSum();
-    if (parseSum()) {
-        printf("\thalt %%%d\n", reg);
+    local expr: -> Expr = parseExpr();
+    if (expr && token.kind == EOI) {
+        printExprTree(expr);
     } else {
         printf("syntax error\n");
     }
