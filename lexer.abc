@@ -57,9 +57,15 @@ fn getToken(): Token
     } else if (ch == '+') {
         nextCh();
         token.kind = PLUS;
+    } else if (ch == '-') {
+        nextCh();
+        token.kind = MINUS;
     } else if (ch == '*') {
         nextCh();
         token.kind = ASTERISK;
+    } else if (ch == '/') {
+        nextCh();
+        token.kind = SLASH;
     } else if (ch == ')') {
         nextCh();
         token.kind = RPAREN;
@@ -84,9 +90,11 @@ fn tokenKindStr(token: TokenKind): -> char
         case DECIMAL_LITERAL:   return "DECIMAL_LITERAL";
         case IDENTIFIER:        return "IDENTIFIER";
         case PLUS:              return "PLUS";
+        case MINUS:		return "MINUS";
 	case LPAREN:		return "LPAREN";
 	case RPAREN:		return "RPAREN";
         case ASTERISK:          return "ASTERISK";
+        case SLASH:             return "SLASH";
         default:                return "??";
     }
 }

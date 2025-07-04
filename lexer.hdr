@@ -2,14 +2,19 @@
 
 enum TokenKind
 {
-    BAD_TOKEN,
-    EOI,
-    DECIMAL_LITERAL,
-    IDENTIFIER,
     PLUS,
+    ASTERISK,
+    SLASH,
+    MINUS,
+    
+    DECIMAL_LITERAL,
     LPAREN,
     RPAREN,
-    ASTERISK,
+    
+    IDENTIFIER,
+    EOI,
+    
+    BAD_TOKEN,
 };
 
 struct Token

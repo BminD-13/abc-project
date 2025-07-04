@@ -35,8 +35,9 @@ fn parseTerm(): -> Expr
     if (left == nullptr) {
         return nullptr;
     }
-    while (token.kind == ASTERISK) {
-        getToken();
+    while (token.kind == ASTERISK || token.kind == SLASH) {
+        local tok: Token = token;
+	getToken();
         local right: -> Expr = parseFactor();
         if (left == nullptr) {
             printf("%u.%u: factor expected\n", token.pos.row, token.pos.col);
@@ -53,7 +54,8 @@ fn parseExpr(): -> Expr
     if (left == nullptr) {
         return nullptr;
     }
-    while (token.kind == PLUS) {
+    while (token.kind == PLUS || token.kind == MINUS) {
+        local tok: Token = token;
         getToken();
         local right: -> Expr = parseTerm();
         if (right == nullptr) {
